@@ -32,6 +32,10 @@ const outputDirectory = process.argv[2]
 const sourceTarget = JSON.parse(fs.readFileSync(path.join(root, "pxtarget.json"), "utf8"));
 const baseProjects = (sourceTarget.staticpkgdirs && sourceTarget.staticpkgdirs.base) || [];
 const pageBackground = sourceTarget.appTheme.backgroundColor.toLowerCase();
+const releaseId = process.env.PXT_STATIC_RELEASE_ID;
+if (!releaseId || !/^[A-Za-z0-9_.-]{1,128}$/.test(releaseId)) {
+    throw new Error("PXT_STATIC_RELEASE_ID must be a safe, non-empty release identifier");
+}
 
 function workspaceSnapshot() {
     const names = childProcess.execFileSync(
@@ -186,6 +190,7 @@ const child = childProcess.spawn(process.execPath, [
     "staticpkg",
     "--output", outputDirectory,
     "--route", "/",
+    "--release-id", releaseId,
     "--no-appcache"
 ], {
     cwd: root,
@@ -262,6 +267,16 @@ child.on("close", async (code, signal) => {
             throw new Error("PWA manifest contains an unresolved deployment placeholder");
         }
 
+        for (const name of ["serviceworker.js", "simulatorserviceworker.js"]) {
+            const worker = fs.readFileSync(path.join(outputDirectory, name), "utf8");
+            if (/@(?:cdnUrl|pxtRelId|relprefix|simUrl|simworkerconfigUrl|targetUrl)@/.test(worker)) {
+                throw new Error(`${name} contains an unresolved deployment placeholder`);
+            }
+            if (!worker.includes(releaseId)) {
+                throw new Error(`${name} does not contain the static release ID`);
+            }
+        }
+
         const drift = changedPaths(before, workspaceSnapshot());
         if (drift.length) {
             throw new Error(`PXT static package changed source-controlled files:\n  ${drift.join("\n  ")}`);
@@ -324,6 +339,25 @@ child.on("close", async (code, signal) => {
         for (const [project, hashes] of cachesByProject) {
             console.log(`${project} firmware cache: ${[...hashes].join(", ")}`);
         }
+
+        const serviceWorkerPath = path.join(outputDirectory, "serviceworker.js");
+        const serviceWorker = fs.readFileSync(serviceWorkerPath, "utf8");
+        const encodedCacheList = /%2Fhexcache%2F[0-9a-f]{64}\.hex(?:;%2Fhexcache%2F[0-9a-f]{64}\.hex)*/;
+        const releaseCacheUrls = releaseCaches.sort()
+            .map(name => encodeURIComponent(`/hexcache/${name}`))
+            .join(";");
+        if (!encodedCacheList.test(serviceWorker)) {
+            throw new Error("Static service worker does not contain its firmware cache list");
+        }
+        const prunedServiceWorker = serviceWorker.replace(encodedCacheList, releaseCacheUrls);
+        const cachedFirmware = [...prunedServiceWorker.matchAll(/%2Fhexcache%2F([0-9a-f]{64})\.hex/g)]
+            .map(match => match[1]);
+        if (cachedFirmware.length !== requiredCaches.size ||
+            cachedFirmware.some(hash => !requiredCaches.has(hash))) {
+            throw new Error("Static service worker firmware list does not match its base projects");
+        }
+        fs.writeFileSync(serviceWorkerPath, prunedServiceWorker);
+
         if (removedCaches.length) {
             console.log(`Removed ${removedCaches.length} obsolete firmware cache file(s) from the static package`);
         }
