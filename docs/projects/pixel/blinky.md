@@ -1,12 +1,12 @@
 # Set Color
 
-Set the color of onboard LED pixel
+Set the color of all ten pixels on the onboard light ring.
 
 ```blocks
 forever(function() {
-    pixel.setColor(0xff0000)
+    light.setAll(0xff0000)
     pause(100)
-    pixel.setColor(0x007fff)
+    light.setAll(0x007fff)
     pause(100)
 })
 ```

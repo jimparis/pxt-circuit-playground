@@ -8,27 +8,27 @@ Blink an LED where the tempo is controlled by a light sensor.
 
 ## Step 1 @fullscreen
 
-Add the code to drives a **blinking LED** on pin **D0**.
+Add the code to drive a **blinking LED** on pin **A1**.
 
 ```blocks
 forever(function () {
-    pins.D0.digitalWrite(true)
+    pins.A1.digitalWrite(true)
     pause(100)
-    pins.D0.digitalWrite(false)
+    pins.A1.digitalWrite(false)
     pause(100)
 })
 ```
 
 ## Step 2 @fullscreen
 
-Insert a ``||pins:analog read||`` block for **A0** in the first ``||loops:pause||`` block.
+Insert a ``||pins:analog read||`` block for **A3** in the first ``||loops:pause||`` block.
 The ``||pins:analog read||`` returns a value between 0 (no input) to 1023 (full input) which will be translated in milliseconds of pause.
 
 ```blocks
 forever(function () {
-    pins.D0.digitalWrite(true)
-    pause(pins.A0.analogRead())
-    pins.D0.digitalWrite(false)
+    pins.A1.digitalWrite(true)
+    pause(pins.A3.analogRead())
+    pins.A1.digitalWrite(false)
     pause(100)
 })
 ```
@@ -43,6 +43,6 @@ Click on the **wrench** icon under the simulator to get detailed breadboarding i
 
 ```config
 feature=uf2
-feature=pind0
-feature=pina0
+feature=pina1
+feature=pina3
 ```

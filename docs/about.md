@@ -1,60 +1,38 @@
 # About
 
-The **Maker Microsoft MakeCode editor** allows to program [various Cortex-based microcontrollers](/boards).
+Circuit Playground MakeCode is a Blocks, JavaScript, and Python editor for two
+Adafruit boards:
 
-* [Add a new board](/boards/add-a-new-board)
+- [Circuit Playground Express](/boards/adafruit-circuit-playground-express)
+- [Circuit Playground Bluefruit](/boards/adafruit-circuit-playground-bluefruit)
 
-## Programming: [Blocks](/blocks) or [JavaScript](/javascript)
+Choose the board whose name matches the label on the device. A project can be
+switched between boards without changing its source. Shared Circuit Playground
+features compile on both; a board-specific feature remains in the program and
+produces a compiler diagnostic when the selected board does not support it.
 
-You can program the @boardname@ using [Blocks](/blocks) or [JavaScript](/javascript) in your web browser.
+## Program and test
+
+Programs can be written with [Blocks](/blocks), [JavaScript](/javascript), or
+Python in a modern browser. The simulator provides a quick test before code is
+downloaded to a physical board.
 
 ```blocks
-forever(function() {
-    pins.LED.digitalWrite(true)
-    pause(500)
-    pins.LED.digitalWrite(false)
-    pause(500)    
+input.buttonA.onEvent(ButtonEvent.Click, function () {
+    light.showRing("red orange yellow green blue indigo violet purple white black")
 })
 ```
 
-```typescript
-forever(function() {
-    pins.LED.digitalWrite(true)
-    pause(500)
-    pins.LED.digitalWrite(false)
-    pause(500)    
-})
-```
+## Download
 
+Connect the Circuit Playground with a data-capable USB cable. A UF2 download
+can be copied to the board's bootloader drive. UF2 remains the recovery and
+Firefox-compatible workflow; direct WebUSB support depends on the selected
+board and installed bootloader.
 
-The editor work in [most modern browsers](/browsers), work [offline](/offline) once loaded and do not require any installation.
+## Open source
 
-## [Compile and Flash: Your Program!](/device/usb)
-
-When you have your code ready, you connect your @boardname@ to a computer via a USB cable
-**then press the reset button** so it appears as a mounted drive (named @boardname@).
-
-Compilation to machine code from [Blocks](/blocks) or [JavaScript](/javascript) happens in the browser. You save the binary
-program to a **.uf2** file, which you then copy to the @boardname@ drive, which flashes the device with the new program.
-
-## Simulator: Test Your Code
-
-You can run your code using the Metro Express simulator, all within the confines of a web browser.
-
-```sim
-forever(function() {
-    pins.LED.digitalWrite(true)
-    pause(500)
-    pins.LED.digitalWrite(false)
-    pause(500)    
-})
-```
-
-## Open Source
-
-Maker is open source on GitHub at https://github.com/microsoft/pxt-maker .
-
-## Forum and chat
-
-* Post a question on the [MakeCode Forum](https://forum.makecode.com)
-* Chat with other users on the [MakeCode Discord](https://aka.ms/makecodecommunity)
+The target source is maintained at
+<https://github.com/jimparis/pxt-circuit-playground>. It is based on Microsoft
+MakeCode and upstream open-source board/runtime projects. This is an
+independent, unofficial project, not an Adafruit or Microsoft product.

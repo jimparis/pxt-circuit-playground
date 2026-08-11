@@ -1,6 +1,7 @@
 {
     "name": "adafruit-circuit-playground-express",
-    "description": "The Adafruit Circuit Playground Express library - beta",
+    "displayName": "Express",
+    "description": "Adafruit Circuit Playground Express",
     "files": [
         "README.md",
         "device.d.ts",
@@ -22,7 +23,8 @@
         "serial": "file:../serial",
         "pulse": "file:../pulse",
         "infrared": "file:../infrared",
-        "storage": "file:../storage"
+        "storage": "file:../storage",
+        "circuit-playground": "file:../circuit-playground"
     },
     "compileServiceVariant": "samd21",
     "core": true,
@@ -34,14 +36,14 @@
         "pinled",
         "pina0",
         "pina1",
+        "pina2",
+        "pina3",
         "toucha0",
         "toucha1",
         "storage",
         "serial",
         "microphone",
-        "jacdac",
         "light",
-        "storage",
         "music",
         "accelerometer",
         "ir"

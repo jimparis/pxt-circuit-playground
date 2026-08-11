@@ -1,111 +1,47 @@
 {
-    "id": "maker",
+    "id": "circuitplayground",
     "platformid": "codal",
-    "nickname": "maker",
-    "name": "MakeCode Maker (Cortex class)",
-    "title": "MakeCode Maker - Blocks / Javascript editor",
-    "description": "A Blocks / JavaScript code editor for MakeCode Maker Boards",
+    "nickname": "circuitplayground",
+    "name": "Circuit Playground MakeCode",
+    "title": "Circuit Playground MakeCode",
+    "description": "A Blocks, JavaScript, and Python editor for the Adafruit Circuit Playground Express and Circuit Playground Bluefruit",
     "corepkg": "core",
     "bundleddirs": [
         "libs/base",
         "libs/base---light",
         "libs/core",
-        "libs/core---stm32",
         "libs/core---nrf52",
-        "libs/core---rp2040",
         "libs/core---samd",
-        "libs/core---samd51",
-        "libs/core---esp32",
-        "libs/core---esp32s2",
-        "libs/screen---st7735",
         "libs/pulse",
         "libs/infrared",
-        "libs/game",
-        "libs/game---light",
         "libs/mixer",
-        "libs/mixer---none",
         "libs/mixer---samd",
-        "libs/mixer---stm32",
         "libs/mixer---nrf52",
-        "libs/mixer---rp2040",
         "libs/pixel",
         "libs/buttons",
         "libs/touch",
         "libs/light",
         "libs/tests",
-        "libs/gamepad",
-        "libs/mouse",
-        "libs/keyboard",
-        "libs/display",
-        "libs/servo",
         "libs/storage",
         "libs/serial",
-        "libs/datalogger",
         "libs/lightsensor",
         "libs/thermometer",
         "libs/switch",
         "libs/accelerometer",
         "libs/microphone",
-        "libs/lora",
-        "libs/power",
-        "libs/lcd",
         "libs/color",
-        "libs/color-sensor",
-        "libs/light-spectrum-sensor",
-        "libs/proximity",
-        "libs/feather",
-        "libs/edge-connector",
-        "libs/esp32",
-        "libs/net",
-        "libs/net-game",
-        "libs/wifi---esp32",
-        "libs/mqtt",
-        "libs/azureiot",
         "libs/settings",
-        "libs/settings---esp32",
-        "libs/settings---files",
-        "libs/radio",
-        "libs/radio-broadcast",
-        "libs/matrix-keypad",
-        "libs/adafruit-feather-m0-express",
-        "libs/adafruit-feather-m4-express",
-        "libs/adafruit-feather-nrf52840-express",
-        "libs/nucleo-f411re",
         "libs/adafruit-circuit-playground-express",
         "libs/adafruit-circuit-playground-bluefruit",
-        "libs/adafruit-trinket-m0",
-        "libs/adafruit-metro-m0-express",
-        "libs/adafruit-metro-m4-express",
-        "libs/adafruit-itsybitsy-m0-express",
-        "libs/adafruit-itsybitsy-m4-express",
-        "libs/adafruit-itsybitsy-nrf52840-express",
-        "libs/adafruit-neotrellis-m4-express",
-        "libs/adafruit-gemma-m0",
-        "libs/robotics-masters-robohatmm1-m4",
-        "libs/adafruit-grand-central-m4-express",
-        "libs/xinabox-cc03",
-        "libs/xinabox-cs11",
-        "libs/arduino-zero",
-        "libs/arduino-mkr1000",
-        "libs/arduino-mkr1010",
-        "libs/arduino-mkr1300",
-        "libs/arduino-nano-33-ble-sense",
-        "libs/electroniccats-meow-meow",
-        "libs/electroniccats-escornabot-makech",
-        "libs/sparkfun-samd21-dev-breakout",
-        "libs/sparkfun-samd21-mini-breakout",
-        "libs/sparkfun-redboard-turbo",
-        "libs/sparkfun-lumidrive",
-        "libs/brain-nrf52840",
-        "libs/stitchkit",
-        "libs/machachi",
-        "libs/espressif-esp32-devkit-c",
-        "libs/rpi-pico",
-        "libs/jacdac-nrfbrain",
-        "libs/jacdac-brain-f4",
-        "libs/jacdac-brain-rp2040",
-        "libs/jacdac-iot-s2"
+        "libs/circuit-playground"
     ],
+    "staticpkgdirs": {
+        "base": [
+            "libs/adafruit-circuit-playground-express",
+            "libs/adafruit-circuit-playground-bluefruit"
+        ],
+        "extensions": []
+    },
     "serial": {
         "useHF2": true,
         "useEditor": true,
@@ -174,24 +110,7 @@
         "openocdScript": "source [find interface/cmsis-dap.cfg]; set CHIPNAME at91samd21g18; source [find target/at91samdXX.cfg]",
         "flashChecksumAddr": 8372,
         "flashCodeAlign": 256,
-        "upgrades": [
-            {
-                "type": "package",
-                "map": {
-                    "circuit-playground": "adafruit-circuit-playground"
-                }
-            }
-        ],
-        "patches": {
-            "0.0.0 - 0.6.8": [
-                {
-                    "type": "package",
-                    "map": {
-                        "arduino-mkr": "arduino-mkr1000"
-                    }
-                }
-            ]
-        }
+        "upgrades": []
     },
     "compileService": {
         "buildEngine": "codal",
@@ -215,57 +134,7 @@
         "dockerImage": "pext/yotta:latest"
     },
     "variants": {
-        "samd51": {
-            "compile": {
-                "hasHex": true,
-                "openocdScript": "source [find interface/cmsis-dap.cfg]; set CHIPNAME at91samd51g19; source [find target/atsame5x.cfg]",
-                "openocdScriptAlt": "source [find interface/stlink-v2.cfg]; set CPUTAPID 0x2ba01477; set CHIPNAME at91samd51g19; source [find target/at91samdXX.cfg]",
-                "ramSize": 196608,
-                "flashEnd": 524288,
-                "uf2Family": "0x55114460"
-            },
-            "compileService": {
-                "codalTarget": {
-                    "name": "codal-itsybitsy-m4",
-                    "url": "https://github.com/lancaster-university/codal-itsybitsy-m4",
-                    "branch": "v0.2.7",
-                    "type": "git"
-                },
-                "codalBinary": "ITSYBITSY_M4",
-                "serviceId": "codal2samd51"
-            }
-        },
         "nrf52840": {
-            "serial": {
-                "useHF2": false
-            },
-            "compile": {
-                "openocdScript": "source [find interface/cmsis-dap.cfg]; source [find target/nrf52.cfg]",
-                "flashChecksumAddr": 0,
-                "webUSB": false,
-                "flashEnd": 1007616,
-                "uf2Family": "0xada52840"
-            },
-            "compileService": {
-                "codalTarget": {
-                    "name": "codal-nrf52840-dk",
-                    "url": "https://github.com/mmoskal/codal-nrf52840-dk",
-                    "branch": "v1.1.8",
-                    "type": "git"
-                },
-                "codalBinary": "NRF52840_DK",
-                "serviceId": "codal2nrf52840",
-                "dockerImage": "pext/yotta:latest",
-                "yottaConfig": {
-                    "pxt": {
-                        "board": {
-                            "id": "BOARD_ID_NRF52840"
-                        }
-                    }
-                }
-            }
-        },
-        "nrf52833": {
             "serial": {
                 "useHF2": true
             },
@@ -273,67 +142,27 @@
                 "openocdScript": "source [find interface/cmsis-dap.cfg]; source [find target/nrf52.cfg]",
                 "flashChecksumAddr": 0,
                 "webUSB": true,
-                "flashEnd": 475136,
+                "flashEnd": 958464,
                 "uf2Family": "0xada52840"
             },
             "compileService": {
                 "codalTarget": {
-                    "name": "codal-makeable",
-                    "url": "https://github.com/jamesadevine/codal-makeable",
-                    "branch": "v0.0.8",
+                    "name": "codal-circuit-playground-bluefruit",
+                    "url": "https://github.com/jimparis/codal-circuit-playground-bluefruit",
+                    "branch": "main",
                     "type": "git"
                 },
-                "codalBinary": "NRF52",
-                "serviceId": "codal2nrf52",
-                "dockerImage": "pext/yotta:latest",
+                "codalBinary": "CIRCUIT_PLAYGROUND_BLUEFRUIT",
+                "serviceId": "codal2circuitplaygroundbluefruit",
+                "dockerImage": "docker.io/pext/yotta@sha256:54acddef1aac8e4a654e591b617e38da12d784da65e8ddc858e8c28fa8bc24e3",
+                "dockerArgs": [],
                 "yottaConfig": {
                     "pxt": {
                         "board": {
-                            "id": "BOARD_ID_NRF52833"
+                            "id": "BOARD_ID_NRF52840"
                         }
                     }
                 }
-            }
-        },
-        "stm32f103": {
-            "compile": {
-                "hasHex": true,
-                "openocdScript": "source [find interface/stlink-v2.cfg]; source [find target/stm32f1x.cfg]",
-                "uf2Family": "0x5ee21072",
-                "webUSB": false,
-                "flashChecksumAddr": 0,
-                "utf8": true
-            },
-            "compileService": {
-                "codalTarget": {
-                    "name": "codal-jacdac-feather",
-                    "url": "https://github.com/lancaster-university/codal-jacdac-feather",
-                    "branch": "v1.1.2",
-                    "type": "git"
-                },
-                "codalBinary": "STM32",
-                "serviceId": "codal2stm32",
-                "dockerImage": "pext/yotta:latest"
-            }
-        },
-        "stm32f401": {
-            "compile": {
-                "hasHex": true,
-                "openocdScript": "source [find interface/cmsis-dap.cfg]; source [find target/stm32f4x.cfg]",
-                "flashChecksumAddr": 0,
-                "flashEnd": 524288,
-                "uf2Family": "0x57755a57"
-            },
-            "compileService": {
-                "codalTarget": {
-                    "name": "codal-big-brainpad",
-                    "url": "https://github.com/lancaster-university/codal-big-brainpad",
-                    "branch": "v1.3.4",
-                    "type": "git"
-                },
-                "codalBinary": "STM32",
-                "serviceId": "codal2stm32",
-                "dockerImage": "pext/yotta:latest"
             }
         },
         "samd21": {
@@ -354,85 +183,29 @@
                 "dockerImage": "pext/yotta:latest",
                 "codalBinary": "CIRCUIT_PLAYGROUND"
             }
-        },
-        "esp32": {
-            "compile": {
-                "hasHex": true,
-                "useESP": true,
-                "useUF2": false,
-                "flashCodeAlign": 256,
-                "webUSB": false,
-                "nativeType": "vm",
-                "stackAlign": 2
-            },
-            "compileService": {
-                "buildEngine": "dockerespidf",
-                "dockerImage": "pext/esp:latest",
-                "dockerArgs": [],
-                "serviceId": "espidf"
-            }
-        },
-        "esp32s2": {
-            "compile": {
-                "hasHex": true,
-                "useESP": true,
-                "useUF2": true,
-                "flashCodeAlign": 256,
-                "webUSB": false,
-                "nativeType": "vm",
-                "uf2Family": "0xbfdd4eee",
-                "stackAlign": 2
-            },
-            "compileService": {
-                "buildEngine": "dockerespidf",
-                "dockerImage": "pext/esp:latest",
-                "dockerArgs": [],
-                "serviceId": "espidf"
-            }
-        },
-        "rp2040": {
-            "compile": {
-                "hasHex": true,
-                "openocdScript": "???",
-                "flashChecksumAddr": 0,
-                "flashEnd": 2097152,
-                "uf2Family": "0xe48bff56"
-            },
-            "compileService": {
-                "codalTarget": {
-                    "name": "codal-pi-pico",
-                    "url": "https://github.com/lancaster-university/codal-pi-pico",
-                    "branch": "v0.0.10",
-                    "type": "git"
-                },
-                "codalBinary": "PI-PICO",
-                "serviceId": "codal2pico",
-                "dockerImage": "pext/arm:gcc9"
-            }
         }
     },
     "appTheme": {
-        "accentColor": "#ecf0f1",
-        "backgroundColor": "#ffffff",
-        "logoUrl": "https://github.com/microsoft/pxt-maker",
+        "accentColor": "#08415C",
+        "backgroundColor": "#202A30",
+        "logoUrl": "https://github.com/jimparis/pxt-circuit-playground",
         "logo": "./static/logo.svg",
         "docsLogo": "./static/logo.svg",
-        "docsHeader": "Microsoft MakeCode Maker",
+        "docsHeader": "Circuit Playground MakeCode",
         "portraitLogo": "./static/logo.svg",
         "footerLogo": "./static/logo.svg",
-        "organization": "Microsoft MakeCode",
-        "organizationUrl": "https://makecode.com/",
-        "organizationLogo": "./static/Microsoft-logo_rgb_c-gray-square.png",
-        "organizationWideLogo": "./static/Microsoft-logo_rgb_c-gray.png",
-        "homeUrl": "https://maker.makecode.com/",
-        "embedUrl": "https://maker.makecode.com/",
-        "privacyUrl": "https://go.microsoft.com/fwlink/?LinkId=521839",
-        "termsOfUseUrl": "https://go.microsoft.com/fwlink/?LinkID=206977",
-        "githubUrl": "https://github.com/microsoft/pxt-maker",
-        "feedbackUrl": "https://forum.makecode.com/",
-        "betaUrl": "https://github.com/microsoft/pxt-maker",
-        "boardName": "board",
-        "homeScreenHero": "./static/hero.jpg",
+        "organization": "Circuit Playground MakeCode",
+        "organizationText": "Circuit Playground MakeCode",
+        "organizationShortText": "Circuit Playground",
+        "organizationUrl": "https://makecode.jim.sh/",
+        "homeUrl": "https://makecode.jim.sh/",
+        "embedUrl": "https://makecode.jim.sh/",
+        "privacyUrl": "/privacy",
+        "termsOfUseUrl": "/terms",
+        "githubUrl": "https://github.com/jimparis/pxt-circuit-playground",
+        "feedbackUrl": "https://github.com/jimparis/pxt-circuit-playground/issues",
+        "boardName": "Circuit Playground",
+        "useTextLogo": "Circuit Playground MakeCode",
         "debugger": true,
         "print": true,
         "chooseBoardOnNewProject": true,
@@ -442,10 +215,6 @@
             {
                 "name": "About",
                 "path": "/about"
-            },
-            {
-                "name": "Forum",
-                "path": "https://forum.makecode.com"
             },
             {
                 "name": "Boards",
@@ -465,12 +234,16 @@
             },
             {
                 "name": "GitHub",
-                "path": "https://github.com/microsoft/pxt-maker"
+                "path": "https://github.com/jimparis/pxt-circuit-playground"
             }
         ],
-        "invertedMenu": false,
-        "invertedToolbox": false,
-        "invertedMonaco": false,
+        "invertedMenu": true,
+        "invertedToolbox": true,
+        "invertedMonaco": true,
+        "baseTheme": "dark",
+        "defaultColorTheme": "circuit-playground-standard",
+        "highContrastColorTheme": "pxt-high-contrast",
+        "saveInMenu": true,
         "monacoToolbox": true,
         "highContrast": true,
         "greenScreen": true,
@@ -479,6 +252,8 @@
         "simAnimationEnter": "fly right in",
         "simAnimationExit": "fly right out",
         "hasAudio": true,
+        "songEditor": true,
+        "extendFieldEditors": true,
         "usbDocs": "/device/usb",
         "disableBlockIcons": true,
         "disableAPICache": true,
@@ -491,11 +266,14 @@
             }
         },
         "blockColors": {
-            "loops": "#40bf4a",
-            "logic": "#4cbfe6",
-            "math": "#9966ff",
-            "variables": "#FF6680",
-            "text": "#ffab19",
+            "light": "#1264a3",
+            "input": "#7f1d7a",
+            "music": "#ad321e",
+            "loops": "#24812f",
+            "logic": "#147a92",
+            "math": "#6b3fc7",
+            "variables": "#b42347",
+            "text": "#a35f00",
             "advanced": "#00272B",
             "functions": "#005a9e",
             "arrays": "#8A1C7C"
@@ -521,6 +299,6 @@
         "openProjectNewTab": true,
         "errorList": true
     },
-    "ignoreDocsErrors": true,
+    "ignoreDocsErrors": false,
     "uploadDocs": false
 }

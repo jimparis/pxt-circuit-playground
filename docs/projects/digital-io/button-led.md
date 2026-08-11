@@ -2,26 +2,26 @@
 
 ## Introduction @unplugged
 
-Use a button on a digital pin to control an LED.
+Use the built-in A button to control an LED connected to pin A1.
 
 ![A breadboard with a button that turns on an LED](/static/projects/digital-io/button-led/gallery.gif)
 
 ## Step 1 @fullscreen
 
-Add a ``||input:on event||`` to handle a "button click" on pin **D0**.
+Add a ``||input:on event||`` to handle a click on built-in **button A**.
 
 ```blocks
-input.buttonD0.onEvent(ButtonEvent.Click, function () {
+input.buttonA.onEvent(ButtonEvent.Click, function () {
 })
 ```
 
 ## Step 2 @fullscreen
 
-Add ``||pins:digital write||`` to set pin **D1** HIGH when **D0** is clicked.
+Add ``||pins:digital write||`` to set pin **A1** HIGH when button A is clicked.
 
 ```blocks
-input.buttonD0.onEvent(ButtonEvent.Click, function () {
-    pins.D1.digitalWrite(true)
+input.buttonA.onEvent(ButtonEvent.Click, function () {
+    pins.A1.digitalWrite(true)
 })
 ```
 
@@ -35,13 +35,13 @@ Try pressing on the button and the LED should light up.
 ## Step 4 @fullscreen
 
 Add ``||loops:pause||`` to wait some time, then another ``||pins:digital write||`` to 
-turn pin **D1** to low.
+turn pin **A1** to low.
 
 ```blocks
-input.buttonD0.onEvent(ButtonEvent.Click, function () {
-    pins.D1.digitalWrite(true)
+input.buttonA.onEvent(ButtonEvent.Click, function () {
+    pins.A1.digitalWrite(true)
     pause(1000)
-    pins.D1.digitalWrite(false)    
+    pins.A1.digitalWrite(false)
 })
 ```
 
@@ -58,6 +58,5 @@ Click on the **wrench** icon under the simulator to print detailed breadboard wi
 
 ```config
 feature=uf2
-feature=pind1
-feature=buttond0
+feature=pina1
 ```

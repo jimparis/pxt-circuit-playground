@@ -70,10 +70,15 @@ namespace pxsim {
 
             pinIds = {}
 
-            for (let block of (boardDefinition.visual as BoardImageDefinition).pinBlocks) {
+            const pinBlocks = (boardDefinition.visual as BoardImageDefinition).pinBlocks;
+            for (let blockIndex = 0; blockIndex < pinBlocks.length; blockIndex++) {
+                const block = pinBlocks[blockIndex];
                 // scan labels
-                for (let lbl of block.labels) {
-                    for (let sublbl of lbl.split(/[\/,]/)) {
+                for (let labelIndex = 0; labelIndex < block.labels.length; labelIndex++) {
+                    const lbl = block.labels[labelIndex];
+                    const sublabels = lbl.split(/[\/,]/);
+                    for (let sublabelIndex = 0; sublabelIndex < sublabels.length; sublabelIndex++) {
+                        let sublbl = sublabels[sublabelIndex];
                         sublbl = sublbl.replace(/[~\s]+/g, "")
                         let id = pinId(sublbl)
                         if (id != null) {
@@ -91,7 +96,9 @@ namespace pxsim {
             }
 
             // also add pins that might not have visual representation
-            for (let k of getAllConfigKeys()) {
+            const configKeys = getAllConfigKeys();
+            for (let configIndex = 0; configIndex < configKeys.length; configIndex++) {
+                const k = configKeys[configIndex];
                 if (/^PIN_/.test(k)) {
                     let id = getConfig(getConfigKey(k))
                     if (id != null) {
@@ -171,7 +178,9 @@ namespace pxsim {
                 || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_DOTSTAR_DATA))
                 || this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_NEOPIXEL));
 
-            if (!this.neopixelPin && (boardDefinition.visual as BoardImageDefinition)?.leds?.some(l => l.color == "neopixel"))
+            const boardVisual = boardDefinition.visual as BoardImageDefinition;
+            if (!this.neopixelPin && boardVisual && boardVisual.leds
+                && boardVisual.leds.some(l => l.color == "neopixel"))
                 this.neopixelPin = this.edgeConnectorState.getPin(getConfig(DAL.CFG_PIN_LED_B))
 
             this.builtinParts["pixels"] = (pin: Pin) => { return this.neopixelState(!!this.neopixelPin && this.neopixelPin.id); };
@@ -181,7 +190,7 @@ namespace pxsim {
 
         kill() {
             super.kill();
-            AudioContextManager.stop();
+            AudioContextManager.stopAll();
         }
 
         initAsync(msg: SimulatorRunMessage): Promise<void> {

@@ -9,7 +9,7 @@ div.blocklyTreeRow {
     padding-left: 4px !important;
     -webkit-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.4);
     -moz-box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.4);
-    box-shadow: inset 0px 0px 0px 1px rgba(0,0,0,0.4);
+    box-shadow: inset 0px 0px 0px 1px rgba(255,255,255,0.28);
 }
 div.blocklyTreeRoot div div div div div.blocklyTreeRow {
     border-left-width: 1px !important;
@@ -20,6 +20,26 @@ div.blocklyTreeRow.blocklyTreeSelected, div.blocklyTreeRoot div div div div div.
     -webkit-box-shadow: inset 0px 0px 0px 2px #fc3;
     -moz-box-shadow: inset 0px 0px 0px 2px #fc3;
     box-shadow: inset 0px 0px 0px 2px #fc3;
+}
+
+/* PXT's generic selected label uses the toolbox background as its color. In
+ * the inverted toolbox the row itself is colored, so that rule can make the
+ * selected label disappear. Every category color below is chosen to retain
+ * WCAG AA contrast with white. */
+.invertedToolbox div.blocklyTreeRow .blocklyTreeLabel,
+.invertedToolbox div.blocklyTreeRow .blocklyTreeIcon,
+.invertedToolbox div.blocklyTreeRow.blocklyTreeSelected .blocklyTreeLabel,
+.invertedToolbox div.blocklyTreeRow.blocklyTreeSelected .blocklyTreeIcon {
+    color: #fff;
+}
+
+/* Control is supplied by pxt-common-packages with a deliberately bright
+ * orange that has better contrast with near-black text. */
+.invertedToolbox #blocks-control .blocklyTreeLabel,
+.invertedToolbox #blocks-control .blocklyTreeIcon,
+.invertedToolbox div.blocklyTreeRow[data-ns="control"] .blocklyTreeLabel,
+.invertedToolbox div.blocklyTreeRow[data-ns="control"] .blocklyTreeIcon {
+    color: #171717;
 }
 
 /* This removes any padding at the top of the toolbox */
@@ -35,13 +55,13 @@ span.blocklyTreeLabel {
 }
 
 svg.blocklySvg {
-    background: #00487C; /* For browsers that do not support gradients */
+    background: var(--pxt-target-background1);
 }
 
 .blocklyToolboxDiv, .monacoToolboxDiv {
     padding: 0.5rem;
     border-right: solid 1px #282828;
-    background-color: #cfcfcf !important;
+    background-color: var(--pxt-target-background3) !important;
 }
 
 /* Search box */

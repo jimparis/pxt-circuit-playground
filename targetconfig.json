@@ -1,79 +1,34 @@
 {
-  "packages": {
-    "approvedOrgs": ["Microsoft"],
-    "approvedRepos": [
-      "microsoft/pxt-jacdac",
-      "jacdac/pxt-jacdac",
-      "microsoft/pxt-ml4f",
-      "Adafruit/pxt-crickit",
-      "Adafruit/pxt-seesaw",
-      "ElectronicCats/pxt-bme280",
-      "ElectronicCats/pxt-airQuality",
-      "ElectronicCats/pxt-lora"
-    ],
-    "preferredRepos": [
-      "jacdac/pxt-jacdac",
-      "Adafruit/pxt-crickit",
-      "Adafruit/pxt-seesaw",
-      "ElectronicCats/pxt-bme280",
-      "ElectronicCats/pxt-airQuality",
-      "ElectronicCats/pxt-lora"
-    ],
-    "approvedEditorExtensionUrls": [
-      "https://microsoft.github.io/ml4f/"
-    ],
-    "approvedRepoLib": {
-      "jacdac/pxt-jacdac": {
-          "preferred": true,
-          "simx": {
-              "sha": "1804c0b3d2976935c476f3b6d425b554a20fa814",
-              "devUrl": "https://jacdac.github.io/jacdac-docs/tools/makecode-sim/"
-          }
-      },
-      "microsoft/pxt-jacdac": {
-          "upgrades": [ "move:jacdac/pxt-jacdac" ],
-          "hidden": true
-      },
-      "microsoft/pxt-ml4f": {},
-      "adafruit/pxt-crickit": {
-        "preferred": true
-      },
-      "adafruit/pxt-seesaw": {
-        "preferred": true
-      },
-      "electroniccats/pxt-bme280": {
-        "preferred": true
-      },
-      "electroniccats/pxt-airquality": {
-        "preferred": true
-      },
-      "electroniccats/pxt-lora": {
-        "preferred": true
-      }
+    "packages": {
+        "approvedOrgs": [
+            "Microsoft",
+            "Adafruit"
+        ],
+        "approvedRepos": [
+            "Adafruit/pxt-crickit",
+            "Adafruit/pxt-seesaw"
+        ],
+        "preferredRepos": [
+            "Adafruit/pxt-crickit",
+            "Adafruit/pxt-seesaw"
+        ],
+        "approvedRepoLib": {
+            "adafruit/pxt-crickit": {
+                "preferred": true
+            },
+            "adafruit/pxt-seesaw": {
+                "preferred": true
+            }
+        }
+    },
+    "galleries": {
+        "Circuit Playground": "/boards",
+        "Digital IO": "/projects/digital-io",
+        "Analog IO": "/projects/analog-io",
+        "Pixel Ring": "/projects/pixel",
+        "Light": "/projects/light",
+        "Music": "/projects/music",
+        "Accelerometer": "/projects/accelerometer",
+        "Serial": "/projects/serial"
     }
-  },
-  "galleries": {
-    "Jacdac": "/boards/jacdac",
-    "Adafruit": "/boards/adafruit",
-    "Arduino": "/boards/arduino",
-    "SparkFun": "/boards/sparkfun",
-    "XinaBox": "/boards/xinabox",
-    "Misc": "/boards/misc",
-    "Digital IO": "/projects/digital-io",
-    "Analog IO": "/projects/analog-io",
-    "Pixel": "/projects/pixel",
-    "Light": "/projects/light",
-    "Music": "/projects/music",
-    "Servos": "/projects/servos",
-    "HID": "/projects/hid",
-    "Screen": "/projects/screen",
-    "Accelerometer": "/projects/accelerometer",
-    "Serial": "/projects/serial",
-    "Storage": "/projects/storage",
-    "LCD": "/projects/lcd",
-    "LoRa": "/projects/lora",
-    "Power": "/projects/power",
-    "Bit Radio": "/projects/radio",
-    "Boards": "/boards"
-  }
 }

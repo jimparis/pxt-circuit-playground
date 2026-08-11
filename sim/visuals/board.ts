@@ -123,7 +123,9 @@ namespace pxsim.visuals {
             this.onBoardButtons = [];
 
             // neopixels/leds
-            for (const l of props.visualDef.leds || []) {
+            const leds = props.visualDef.leds || [];
+            for (let ledIndex = 0; ledIndex < leds.length; ledIndex++) {
+                const l = leds[ledIndex];
                 if (l.color == "neopixel") {
                     const onBoardNeopixel = new BoardNeopixel(l.label, l.x, l.y, l.w || 0);
                     this.onBoardNeopixels.push(onBoardNeopixel);
@@ -151,7 +153,9 @@ namespace pxsim.visuals {
             }
 
             // touch pads
-            for (const l of props.visualDef.touchPads || []) {
+            const touchPads = props.visualDef.touchPads || [];
+            for (let touchIndex = 0; touchIndex < touchPads.length; touchIndex++) {
+                const l = touchPads[touchIndex];
                 const pin = pxsim.pinIds[l.label];
                 if (!pin) {
                     console.error(`touch pin ${pin} not found`)
@@ -163,7 +167,9 @@ namespace pxsim.visuals {
             }
 
             // regular buttons
-            for (const l of props.visualDef.buttons || []) {
+            const buttons = props.visualDef.buttons || [];
+            for (let buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
+                const l = buttons[buttonIndex];
                 const tp = new BoardButton(l);
                 this.onBoardButtons.push(tp);
                 el.appendChild(tp.element);
@@ -284,7 +290,9 @@ namespace pxsim.visuals {
 
         setColor(rgb: [number, number, number]) {
             const hsl = visuals.rgbToHsl(rgb);
-            let [h, s, l] = hsl;
+            const h = hsl[0];
+            const s = hsl[1];
+            let l = hsl[2];
             const lx = Math.max(l * 1.3, 85);
 
             // at least 10% luminosity

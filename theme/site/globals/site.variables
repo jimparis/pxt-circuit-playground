@@ -27,8 +27,8 @@
 @purple:#8073E5;
 @orange:#FFA702;
 
-@pageBackground: #ecf0f1;
-@serialTextColor: #333;
+@pageBackground: #202a30;
+@serialTextColor: #f4f7f8;
 
 /*******************************
          PXT Overrides
@@ -57,12 +57,12 @@
    Background
 --------------------*/
 
-@simulatorBackground: #fafafa; /*#313638;*/
-@editorToolsBackground: #dfdfdf; /*#1e1e1e;*/
-@blocklySvgColor: #4c4b4d; /*#1e1e1e;*/
+@simulatorBackground: #182126;
+@editorToolsBackground: #202a30;
+@blocklySvgColor: #26343b;
 
-@blocklyFlyoutColor : #eaeaea;
-@flyoutLabelColor: #555;
+@blocklyFlyoutColor : #e7edf0;
+@flyoutLabelColor: #243139;
 @monacoFlyoutColor: rgba(40, 40, 40, 0.9);
 @monacoFlyoutText: fade(@white, 70%);
 @monacoFlyoutBorderColor: fade(@monacoFlyoutText, 40%);

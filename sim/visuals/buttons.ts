@@ -28,7 +28,8 @@ namespace pxsim.visuals {
 
         public moveToCoord(xy: Coord) {
             let btnWidth = PIN_DIST * 3;
-            let [x, y] = xy;
+            const x = xy[0];
+            const y = xy[1];
             translateEl(this.btn, [x, y])
         }
 

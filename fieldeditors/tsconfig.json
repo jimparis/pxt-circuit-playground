@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2017",
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "module": "commonjs",
+        "declaration": true,
+        "outDir": "../built/fieldeditors",
+        "rootDir": ".",
+        "newLine": "LF",
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
+        "types": []
+    }
+}

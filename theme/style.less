@@ -25,6 +25,51 @@
     Add your custom CSS here
 *******************************/
 
+/* The target name is the brand; don't render a second partner-logo slot. */
+#mainmenu .logo.organization {
+    display: none;
+}
+
+#mainmenu.inverted {
+    background: @teal;
+    box-shadow: 0 2px 8px fade(@black, 24%);
+}
+
+#mainmenu.inverted #settings-menuitem {
+    color: @white;
+    background: transparent;
+}
+
+#mainmenu.inverted #settings-menuitem:hover,
+#mainmenu.inverted #settings-menuitem:focus {
+    color: @white;
+    background: fade(@white, 14%);
+}
+
+/* Give the home screen some depth without depending on another image asset. */
+.ui.home.projectsdialog,
+.ui.segment.tabsegment {
+    background: linear-gradient(145deg, #182126 0%, #203943 55%, #35213a 100%) !important;
+    color: var(--pxt-neutral-foreground1);
+}
+
+.ui.home.projectsdialog .header,
+.ui.home.projectsdialog .ui.header,
+.ui.segment.tabsegment .header,
+.ui.segment.tabsegment .ui.header {
+    color: var(--pxt-neutral-foreground1) !important;
+}
+
+.ui.card.newprojectcard {
+    background: linear-gradient(135deg, @teal 0%, @blue 100%) !important;
+}
+
+.ui.card.newprojectcard .content,
+.ui.card.newprojectcard .header,
+.ui.card.newprojectcard .icon {
+    color: @white !important;
+}
+
 .ui.button.download-button {
     &:extend(.ui.secondary.button all);
 }
@@ -46,7 +91,8 @@
 }
 
 .restart-button, .play-button, .collapse-button, .mute-button:not(.red), .debug-button:not(.orange), .trace-button:not(.orange), .fullscreen-button  {
-    background-color: #cfcfcf !important;
+    background-color: var(--pxt-secondary-background) !important;
+    color: var(--pxt-secondary-foreground) !important;
 }
 
 /* Editor menu toggle */

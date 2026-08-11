@@ -13,21 +13,21 @@ forever(function () {
 ```
 ## Step 1 @fullscreen
 
-Add ``||pins:digital write||`` under the ``||loops:forever||`` to set pin **D1** to ``LOW`` (false).
+Add ``||pins:digital write||`` under the ``||loops:forever||`` to set pin **A2** to ``LOW`` (false).
 
 ```blocks
 forever(function () {
-    pins.D1.digitalWrite(false)
+    pins.A2.digitalWrite(false)
 })
 ```
 
 ## Step 2 @fullscreen
 
-Add ``||pins:digital read||`` in the ``LOW``/``HIGH`` slot. Change the pin to **D0**.
+Add ``||pins:digital read||`` in the ``LOW``/``HIGH`` slot. Change the pin to **A1**.
 
 ```blocks
 forever(function () {
-    pins.D1.digitalWrite(pins.D0.digitalRead())
+    pins.A2.digitalWrite(pins.A1.digitalRead())
 })
 ```
 
@@ -43,6 +43,6 @@ breadboarding instructions.
 
 ```config
 feature=uf2
-feature=pind0
-feature=pind1
+feature=pina1
+feature=pina2
 ```

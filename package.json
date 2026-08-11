@@ -1,23 +1,24 @@
 {
-    "name": "pxt-maker",
+    "name": "pxt-circuit-playground",
     "version": "0.15.77",
-    "description": "Microsoft MakeCode Maker Boards",
+    "description": "MakeCode target for Adafruit Circuit Playground Express and Bluefruit",
     "public": true,
     "keywords": [
         "JavaScript",
         "education",
-        "maker",
+        "Circuit Playground",
+        "Adafruit",
         "pxt",
         "MakeCode",
-        "Microsoft"
+        "Microsoft MakeCode"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/microsoft/pxt-maker.git"
+        "url": "git+https://github.com/jimparis/pxt-circuit-playground.git"
     },
-    "author": "",
+    "author": "Jim Paris",
     "license": "MIT",
-    "homepage": "https://github.com/microsoft/pxt-maker#readme",
+    "homepage": "https://makecode.jim.sh/",
     "files": [
         "README.md",
         "pxtarget.json",
@@ -53,7 +54,11 @@
         "pxt-core": "13.1.5"
     },
     "scripts": {
-        "test": "node node_modules/pxt-core/built/pxt.js travis",
+        "postinstall": "node scripts/patch-pxt-core.js",
+        "ci": "node scripts/patch-pxt-core.js && node scripts/pxt-ci.js && npm run test:boards && npm run test:static",
+        "test:boards": "node scripts/check-board-contract.js",
+        "test:static": "node scripts/patch-pxt-core.js && node scripts/pxt-static-check.js",
+        "test": "npm run ci",
         "svgo": "glob-exec --foreach \"**/boardhd.svg\" -- \"svgo --config=svgo.yml {{file}} -o {{file.dir}}/board.svg \""
     },
     "overrides": {

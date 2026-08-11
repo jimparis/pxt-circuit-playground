@@ -9,12 +9,7 @@
         "newLine": "LF",
         "moduleResolution": "node",
         "sourceMap": false,
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "scripthost",
-            "es2017"
-        ],
+        "skipLibCheck": true,
         "types": []
     }
 }
