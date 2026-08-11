@@ -1,5 +1,8 @@
 {
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/core---nrf52",
+    "disablesVariants": [
+        "samd21"
+    ],
     "cppDependencies": {
         "accelerometer": "file:../accelerometer",
         "buttons": "file:../buttons",

@@ -1,3 +1,6 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mixer---samd"
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/mixer---samd",
+    "disablesVariants": [
+        "nrf52840"
+    ]
 }

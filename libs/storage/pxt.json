@@ -1,3 +1,6 @@
 {
-    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/storage"
+    "additionalFilePath": "../../node_modules/pxt-common-packages/libs/storage",
+    "disablesVariants": [
+        "nrf52840"
+    ]
 }

@@ -1,5 +1,8 @@
 {
     "additionalFilePath": "../../node_modules/pxt-common-packages/libs/core---samd",
+    "disablesVariants": [
+        "nrf52840"
+    ],
     "cppDependencies": {
         "accelerometer": "file:../accelerometer",
         "mixer---samd": "file:../mixer---samd",
