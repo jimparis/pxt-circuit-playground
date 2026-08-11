@@ -51,13 +51,12 @@
     },
     "dependencies": {
         "pxt-common-packages": "14.1.3",
-        "pxt-core": "13.1.5"
+        "pxt-core": "file:../pxt"
     },
     "scripts": {
-        "postinstall": "node scripts/patch-pxt-core.js",
-        "ci": "node scripts/patch-pxt-core.js && node scripts/pxt-ci.js && npm run test:boards && npm run test:static",
+        "ci": "node scripts/pxt-ci.js && npm run test:boards && npm run test:static",
         "test:boards": "node scripts/check-board-contract.js",
-        "test:static": "node scripts/patch-pxt-core.js && node scripts/pxt-static-check.js",
+        "test:static": "node scripts/pxt-static-check.js",
         "test": "npm run ci",
         "svgo": "glob-exec --foreach \"**/boardhd.svg\" -- \"svgo --config=svgo.yml {{file}} -o {{file.dir}}/board.svg \""
     },
