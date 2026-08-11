@@ -32,9 +32,9 @@ const outputDirectory = process.argv[2]
 const sourceTarget = JSON.parse(fs.readFileSync(path.join(root, "pxtarget.json"), "utf8"));
 const baseProjects = (sourceTarget.staticpkgdirs && sourceTarget.staticpkgdirs.base) || [];
 const pageBackground = sourceTarget.appTheme.backgroundColor.toLowerCase();
-const releaseId = process.env.PXT_STATIC_RELEASE_ID;
-if (!releaseId || !/^[A-Za-z0-9_.-]{1,128}$/.test(releaseId)) {
-    throw new Error("PXT_STATIC_RELEASE_ID must be a safe, non-empty release identifier");
+const releaseId = process.env.PXT_STATIC_RELEASE_ID || "local-static-test";
+if (!/^[A-Za-z0-9_.-]{1,128}$/.test(releaseId)) {
+    throw new Error("PXT_STATIC_RELEASE_ID must be a safe release identifier");
 }
 
 function workspaceSnapshot() {
