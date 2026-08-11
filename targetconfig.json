@@ -1,23 +1,17 @@
 {
     "packages": {
-        "approvedOrgs": [
-            "Microsoft",
-            "Adafruit"
-        ],
-        "approvedRepos": [
-            "Adafruit/pxt-crickit",
-            "Adafruit/pxt-seesaw"
-        ],
-        "preferredRepos": [
-            "Adafruit/pxt-crickit",
-            "Adafruit/pxt-seesaw"
-        ],
         "approvedRepoLib": {
             "adafruit/pxt-crickit": {
-                "preferred": true
+                "preferred": true,
+                "displayName": "Adafruit CRICKIT",
+                "description": "Control motors, servos, solenoids, and sensors with an Adafruit CRICKIT.",
+                "version": "v0.0.32"
             },
             "adafruit/pxt-seesaw": {
-                "preferred": true
+                "preferred": true,
+                "displayName": "Adafruit Seesaw",
+                "description": "Use Adafruit seesaw-based I/O expanders and peripheral boards.",
+                "version": "v0.0.19"
             }
         }
     },
