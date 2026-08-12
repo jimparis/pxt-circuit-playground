@@ -2,7 +2,7 @@
 
 * [About](/about)
 * [Choose or change boards](/multiboard)
-* [Download with USB and UF2](/device/usb)
+* [Program a board over USB](/device/usb)
 * [Privacy](/privacy)
 * [Terms of use](/terms)
 

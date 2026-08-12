@@ -1,12 +1,50 @@
-# Download with USB and UF2
+# Program a board over USB
 
 Use a USB data cable to connect your Circuit Playground board. A charge-only
 cable can power the board but cannot transfer a program.
 
-## Copy a program to the board
+## Direct transfer in Chrome or Edge
+
+1. Confirm that the selected board matches your hardware.
+2. Open the **...** menu beside **Download** and select **Connect Device**.
+3. Select the Circuit Playground in the browser's device chooser and approve
+   the connection.
+4. Select **Download**. MakeCode builds the program and transfers it directly.
+
+Circuit Playground Express uses WebUSB while the application is running and
+the stock bootloader's WebHID interface after it resets. Because those are two
+device identities and two browser APIs, a new browser profile can show one
+chooser for the running application and a second chooser the first time it
+sees the bootloader. The browser remembers each approval for later transfers.
+
+Circuit Playground Bluefruit uses its direct HF2 USB interface in both modes.
+
+If direct transfer fails, MakeCode asks whether to try again, download the UF2
+for manual copying, or cancel. It does not silently download a UF2.
+
+## Desktop Linux permissions
+
+Chrome and Edge on desktop Linux normally need a one-time udev rule before
+they can open these boards. Open the **...** menu beside **Download**, select
+**Linux USB setup**, and download the product-specific rules file. Then run:
+
+```sh
+sudo install -m 0644 "$HOME/Downloads/60-circuit-playground-webusb.rules" \
+    /etc/udev/rules.d/60-circuit-playground-webusb.rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger --action=add --subsystem-match=usb
+sudo udevadm trigger --action=add --subsystem-match=hidraw
+```
+
+Reconnect the board and choose **Connect Device** again. ChromeOS, macOS, and
+Windows do not use this udev file. ChromeOS handles device-node access through
+its system permission broker, although the first browser chooser is still
+required.
+
+## Copy a UF2 manually
 
 1. In MakeCode, confirm that the selected board matches your hardware.
-2. Select **Download** to build the board-specific `.uf2` file.
+2. Open the **...** menu beside **Download** and select **Download as File**.
 3. Put the board in bootloader mode. If its bootloader drive is not already
    visible, press the board's reset button twice in quick succession.
 4. Copy the downloaded `.uf2` file to the bootloader drive.
@@ -25,6 +63,3 @@ normal; its exact pattern depends on the installed bootloader version.
 Do not copy a Circuit Playground Express UF2 to Circuit Playground Bluefruit,
 or a Bluefruit UF2 to an Express. Return to the editor, select the correct
 board, and download again.
-
-Direct WebUSB upload for Circuit Playground Bluefruit is still under
-development. The current alpha uses UF2 download for Bluefruit programming.

@@ -290,10 +290,23 @@ child.on("close", async (code, signal) => {
             "docs/about.html",
             "docs/boards.html",
             "docs/privacy.html",
-            "docs/terms.html"
+            "docs/terms.html",
+            "docs/static/60-circuit-playground-webusb.rules"
         ]) requireFile(name);
 
         const target = JSON.parse(fs.readFileSync(path.join(outputDirectory, "target.json"), "utf8"));
+        const rulesName = "60-circuit-playground-webusb.rules";
+        if (target.appTheme.linuxUdevRulesUrl !== `/static/${rulesName}` ||
+            target.appTheme.linuxUdevRulesFileName !== rulesName) {
+            throw new Error("Static package has invalid Linux device-rules metadata");
+        }
+        const packagedRules = fs.readFileSync(
+            path.join(outputDirectory, "docs", "static", rulesName), "utf8");
+        const sourceRules = fs.readFileSync(
+            path.join(root, "docs", "static", rulesName), "utf8");
+        if (packagedRules !== sourceRules) {
+            throw new Error("Static package Linux device rules differ from the target source");
+        }
         for (const board of [
             "adafruit-circuit-playground-express",
             "adafruit-circuit-playground-bluefruit"

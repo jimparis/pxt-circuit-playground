@@ -269,6 +269,8 @@
         "songEditor": true,
         "extendFieldEditors": true,
         "usbDocs": "/device/usb",
+        "linuxUdevRulesUrl": "/static/60-circuit-playground-webusb.rules",
+        "linuxUdevRulesFileName": "60-circuit-playground-webusb.rules",
         "disableBlockIcons": true,
         "disableAPICache": true,
         "blocklyOptions": {
