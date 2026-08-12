@@ -13,6 +13,7 @@ function parseHex(filename) {
     let minimum = Infinity;
     let maximum = -1;
     let bytes = 0;
+    const data = [];
     const lines = fs.readFileSync(filename, "utf8").trim().split(/\r?\n/);
 
     lines.forEach((line, index) => {
@@ -34,9 +35,11 @@ function parseHex(filename) {
         const type = record[3];
         if (type === 0) {
             const start = upperAddress + offset;
+            const payload = record.subarray(4, 4 + length);
             minimum = Math.min(minimum, start);
             maximum = Math.max(maximum, start + length);
             bytes += length;
+            data.push({ start, payload });
         } else if (type === 2) {
             upperAddress = record.readUInt16BE(4) << 4;
         } else if (type === 4) {
@@ -46,7 +49,21 @@ function parseHex(filename) {
 
     if (!bytes)
         throw new Error(`${filename}: contains no data records`);
-    return { minimum, maximum, bytes };
+    return { minimum, maximum, bytes, data };
+}
+
+function findUint32LE(image, value) {
+    const needle = Buffer.alloc(4);
+    needle.writeUInt32LE(value);
+    return image.data.flatMap(record => {
+        const addresses = [];
+        let offset = 0;
+        while ((offset = record.payload.indexOf(needle, offset)) !== -1) {
+            addresses.push(record.start + offset);
+            offset++;
+        }
+        return addresses;
+    });
 }
 
 const directory = process.argv[2];
@@ -75,6 +92,15 @@ for (const filename of files) {
         throw new Error(`${filename}: unknown application start 0x${image.minimum.toString(16)}`);
     if (image.maximum > board.end)
         throw new Error(`${filename}: ${board.name} data ends at 0x${image.maximum.toString(16)}, beyond 0x${board.end.toString(16)}`);
+    if (board.name === "CPX") {
+        const bootMagic = findUint32LE(image, 0xf01669ef);
+        const quickBootMagic = findUint32LE(image, 0xf02669ef);
+        if (!bootMagic.length || !quickBootMagic.length)
+            throw new Error(`${filename}: CPX firmware lacks the Adafruit UF2 reset sentinels`);
+        console.log(`CPX WebUSB reset sentinels: bootloader ${bootMagic.map(address =>
+            `0x${address.toString(16)}`).join(", ")}; application ${quickBootMagic.map(address =>
+            `0x${address.toString(16)}`).join(", ")}`);
+    }
     seen.add(board.name);
     console.log(`${board.name}: ${path.basename(filename)} covers 0x${image.minimum.toString(16)}..<0x${image.maximum.toString(16)} (${image.bytes} data bytes)`);
 }
