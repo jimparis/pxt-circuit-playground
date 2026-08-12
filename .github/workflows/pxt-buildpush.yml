@@ -77,10 +77,12 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends gcc-arm-none-eabi podman
-          mkdir -p "$RUNNER_TEMP/podman-bin"
-          ln -s /usr/bin/podman "$RUNNER_TEMP/podman-bin/docker"
-          echo "$RUNNER_TEMP/podman-bin" >> "$GITHUB_PATH"
-          podman pull docker.io/pext/yotta@sha256:54acddef1aac8e4a654e591b617e38da12d784da65e8ddc858e8c28fa8bc24e3
+          echo "$GITHUB_WORKSPACE/pxt-circuit-playground/.github/scripts" >> "$GITHUB_PATH"
+          sudo podman pull docker.io/pext/yotta@sha256:54acddef1aac8e4a654e591b617e38da12d784da65e8ddc858e8c28fa8bc24e3
+          sudo podman run --rm --network=host \
+            --user "$(id -u):$(id -g)" \
+            docker.io/pext/yotta@sha256:54acddef1aac8e4a654e591b617e38da12d784da65e8ddc858e8c28fa8bc24e3 \
+            git ls-remote https://github.com/lancaster-university/codal-core HEAD
 
       - name: Build pinned PXT fork
         working-directory: pxt
@@ -96,6 +98,7 @@ jobs:
         run: npm ci
 
       - name: Build offline CPB firmware cache
+        timeout-minutes: 15
         run: node scripts/build-pxt-cpb.js
 
       - name: Test target and both boards

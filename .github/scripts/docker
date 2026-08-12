@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -eu
+
+if [ "${1:-}" = "run" ]; then
+    shift
+    exec sudo /usr/bin/podman run \
+        --network=host \
+        --user "$(id -u):$(id -g)" \
+        "$@"
+fi
+
+exec sudo /usr/bin/podman "$@"
