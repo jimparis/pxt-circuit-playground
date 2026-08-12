@@ -302,6 +302,7 @@ child.on("close", async (code, signal) => {
         }
         if (!target.appTheme.guidedDownloadFlow ||
             target.appTheme.guidedDownloadRequiresWebHID ||
+            !target.appTheme.downloadDialogTheme ||
             target.compile.hidSelectors?.length ||
             target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-express"] !== "CPLAYBOOT" ||
             target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-bluefruit"] !== "CPLAYBTBOOT") {

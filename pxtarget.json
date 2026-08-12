@@ -207,6 +207,10 @@
         "boardName": "Circuit Playground",
         "guidedDownloadFlow": true,
         "guidedDownloadRequiresWebHID": false,
+        "downloadDialogTheme": {
+            "deviceIcon": "usb",
+            "deviceSuccessIcon": "check circle"
+        },
         "driveDisplayNames": {
             "adafruit-circuit-playground-express": "CPLAYBOOT",
             "adafruit-circuit-playground-bluefruit": "CPLAYBTBOOT"
