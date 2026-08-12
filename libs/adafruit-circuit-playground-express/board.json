@@ -1,5 +1,6 @@
 {
-  "driveDisplayName": "",
+  "boardName": "Circuit Playground Express",
+  "driveDisplayName": "CPLAYBOOT",
   "visual": {
     "image": "pkg://board.svg",
     "useCrocClips": true,

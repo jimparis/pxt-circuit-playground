@@ -1,5 +1,6 @@
 {
-  "driveDisplayName": "",
+  "boardName": "Circuit Playground Bluefruit",
+  "driveDisplayName": "CPLAYBTBOOT",
   "visual": {
     "image": "pkg://board.svg",
     "useCrocClips": true,
