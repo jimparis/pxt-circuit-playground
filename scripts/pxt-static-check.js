@@ -301,7 +301,8 @@ child.on("close", async (code, signal) => {
             throw new Error("Static package has invalid Linux device-rules metadata");
         }
         if (!target.appTheme.guidedDownloadFlow ||
-            !target.appTheme.guidedDownloadRequiresWebHID ||
+            target.appTheme.guidedDownloadRequiresWebHID ||
+            target.compile.hidSelectors?.length ||
             target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-express"] !== "CPLAYBOOT" ||
             target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-bluefruit"] !== "CPLAYBTBOOT") {
             throw new Error("Static package has invalid guided-download metadata");

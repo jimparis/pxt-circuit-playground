@@ -3,6 +3,7 @@
 * [About](/about)
 * [Choose or change boards](/multiboard)
 * [Program a board over USB](/device/usb)
+    * [Enable direct transfer on Express](/device/express-bootloader)
     * [Enable direct transfer on Bluefruit](/device/bluefruit-bootloader)
 * [Privacy](/privacy)
 * [Terms of use](/terms)

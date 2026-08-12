@@ -102,20 +102,6 @@
         "isNative": true,
         "useUF2": true,
         "webUSB": true,
-        "hidSelectors": [
-            {
-                "vid": "0x239a",
-                "pid": "0x0018",
-                "usagePage": "0xff97",
-                "usageId": "0x0001"
-            },
-            {
-                "vid": "0x239a",
-                "pid": "0x0045",
-                "usagePage": "0xff97",
-                "usageId": "0x0001"
-            }
-        ],
         "hasHex": true,
         "saveAsPNG": true,
         "deployDrives": ".*",
@@ -220,7 +206,7 @@
         "feedbackUrl": "https://github.com/jimparis/pxt-circuit-playground/issues",
         "boardName": "Circuit Playground",
         "guidedDownloadFlow": true,
-        "guidedDownloadRequiresWebHID": true,
+        "guidedDownloadRequiresWebHID": false,
         "driveDisplayNames": {
             "adafruit-circuit-playground-express": "CPLAYBOOT",
             "adafruit-circuit-playground-bluefruit": "CPLAYBTBOOT"

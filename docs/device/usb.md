@@ -12,19 +12,21 @@ cable can power the board but cannot transfer a program.
 4. The primary button changes to **Send to Board**. Select it whenever you want
    to build the program and transfer it directly.
 
-Circuit Playground Express uses WebUSB while the application is running and
-the stock bootloader's WebHID interface after it resets. Because those are two
-device identities and two browser APIs, a new browser profile can show one
-chooser for the running application and a second chooser the first time it
-sees the bootloader. The browser remembers each approval for later transfers.
+Circuit Playground Express uses WebUSB while the application is running and in
+the current Adafruit bootloader. Older bootloaders still support manual UF2
+copying but lack the stable WebUSB identity needed for automatic reconnect. If
+an Express cannot reconnect during transfer, use the optional
+[one-time official bootloader setup](/device/express-bootloader).
 
 Circuit Playground Bluefruit uses its direct HF2 USB interface in both modes
 after its optional [one-time direct-transfer setup](/device/bluefruit-bootloader).
 The stock Adafruit bootloader still supports manual UF2 copying but does not
 provide the HF2 interface this editor needs for direct transfer.
 
-If direct transfer fails, MakeCode asks whether to try again, download the UF2
-for manual copying, or cancel. It does not silently download a UF2.
+If pairing or direct transfer fails, MakeCode asks whether to try again,
+download the UF2 for manual copying, or cancel. It does not silently download a
+UF2. The same dialog contains troubleshooting tips and, on desktop Linux, the
+one-time device-permission setup.
 
 ## Desktop Linux permissions
 
