@@ -73,10 +73,14 @@ jobs:
             pxt/package-lock.json
             pxt-circuit-playground/package-lock.json
 
-      - name: Install native inspection tools
+      - name: Install native build tools
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends gcc-arm-none-eabi
+          sudo apt-get install --yes --no-install-recommends gcc-arm-none-eabi podman
+          mkdir -p "$RUNNER_TEMP/podman-bin"
+          ln -s /usr/bin/podman "$RUNNER_TEMP/podman-bin/docker"
+          echo "$RUNNER_TEMP/podman-bin" >> "$GITHUB_PATH"
+          podman pull docker.io/pext/yotta@sha256:54acddef1aac8e4a654e591b617e38da12d784da65e8ddc858e8c28fa8bc24e3
 
       - name: Build pinned PXT fork
         working-directory: pxt
