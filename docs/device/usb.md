@@ -18,7 +18,10 @@ device identities and two browser APIs, a new browser profile can show one
 chooser for the running application and a second chooser the first time it
 sees the bootloader. The browser remembers each approval for later transfers.
 
-Circuit Playground Bluefruit uses its direct HF2 USB interface in both modes.
+Circuit Playground Bluefruit uses its direct HF2 USB interface in both modes
+after its optional [one-time direct-transfer setup](/device/bluefruit-bootloader).
+The stock Adafruit bootloader still supports manual UF2 copying but does not
+provide the HF2 interface this editor needs for direct transfer.
 
 If direct transfer fails, MakeCode asks whether to try again, download the UF2
 for manual copying, or cancel. It does not silently download a UF2.
