@@ -219,6 +219,12 @@
         "githubUrl": "https://github.com/jimparis/pxt-circuit-playground",
         "feedbackUrl": "https://github.com/jimparis/pxt-circuit-playground/issues",
         "boardName": "Circuit Playground",
+        "guidedDownloadFlow": true,
+        "guidedDownloadRequiresWebHID": true,
+        "driveDisplayNames": {
+            "adafruit-circuit-playground-express": "CPLAYBOOT",
+            "adafruit-circuit-playground-bluefruit": "CPLAYBTBOOT"
+        },
         "useTextLogo": "Circuit Playground MakeCode",
         "debugger": true,
         "print": true,

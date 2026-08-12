@@ -6,10 +6,11 @@ cable can power the board but cannot transfer a program.
 ## Direct transfer in Chrome or Edge
 
 1. Confirm that the selected board matches your hardware.
-2. Open the **...** menu beside **Download** and select **Connect Device**.
+2. Select **Connect Device**.
 3. Select the Circuit Playground in the browser's device chooser and approve
    the connection.
-4. Select **Download**. MakeCode builds the program and transfers it directly.
+4. The primary button changes to **Send to Board**. Select it whenever you want
+   to build the program and transfer it directly.
 
 Circuit Playground Express uses WebUSB while the application is running and
 the stock bootloader's WebHID interface after it resets. Because those are two
@@ -25,8 +26,9 @@ for manual copying, or cancel. It does not silently download a UF2.
 ## Desktop Linux permissions
 
 Chrome and Edge on desktop Linux normally need a one-time udev rule before
-they can open these boards. Open the **...** menu beside **Download**, select
-**Linux USB setup**, and download the product-specific rules file. Then run:
+they can open these boards. If connecting fails, select **Troubleshooting tips
+for Linux** in the failure dialog, then download the product-specific rules
+file. Run:
 
 ```sh
 sudo install -m 0644 "$HOME/Downloads/60-circuit-playground-webusb.rules" \
@@ -50,6 +52,9 @@ required.
 4. Copy the downloaded `.uf2` file to the bootloader drive.
 5. Wait for the copy to finish. The drive normally disconnects and the new
    program starts automatically.
+
+The Express bootloader drive is named `CPLAYBOOT`; the Bluefruit bootloader
+drive is named `CPLAYBTBOOT`.
 
 UF2 download works without WebUSB and is the supported fallback in Firefox.
 It also remains the recovery path if direct upload is unavailable.

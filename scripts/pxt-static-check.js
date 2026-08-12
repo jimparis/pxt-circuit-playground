@@ -300,6 +300,12 @@ child.on("close", async (code, signal) => {
             target.appTheme.linuxUdevRulesFileName !== rulesName) {
             throw new Error("Static package has invalid Linux device-rules metadata");
         }
+        if (!target.appTheme.guidedDownloadFlow ||
+            !target.appTheme.guidedDownloadRequiresWebHID ||
+            target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-express"] !== "CPLAYBOOT" ||
+            target.appTheme.driveDisplayNames?.["adafruit-circuit-playground-bluefruit"] !== "CPLAYBTBOOT") {
+            throw new Error("Static package has invalid guided-download metadata");
+        }
         const packagedRules = fs.readFileSync(
             path.join(outputDirectory, "docs", "static", rulesName), "utf8");
         const sourceRules = fs.readFileSync(
