@@ -102,6 +102,20 @@
         "isNative": true,
         "useUF2": true,
         "webUSB": true,
+        "hidSelectors": [
+            {
+                "vid": "0x239a",
+                "pid": "0x0018",
+                "usagePage": "0xff97",
+                "usageId": "0x0001"
+            },
+            {
+                "vid": "0x239a",
+                "pid": "0x0045",
+                "usagePage": "0xff97",
+                "usageId": "0x0001"
+            }
+        ],
         "hasHex": true,
         "saveAsPNG": true,
         "deployDrives": ".*",
