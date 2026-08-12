@@ -22,31 +22,47 @@ jobs:
     timeout-minutes: 45
 
     steps:
-      # The orchestrator commit pins PXT, the CPB runtime, and the bootloader
-      # used together by production. The target checkout below is replaced by
-      # the revision that triggered this workflow so pull requests are tested
-      # without weakening the other pins.
-      - name: Check out pinned build workspace
+      # The orchestrator supplies the reproducible native-build scripts. Each
+      # independently versioned repository is then checked out shallowly at
+      # the exact commit used by production; only the target uses the revision
+      # that triggered this workflow.
+      - name: Check out pinned build scripts
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: jimparis/makecode
           ref: e3a586357c5e3c48f661b50d1bcf284479e920d6
-          submodules: recursive
+          sparse-checkout: scripts
           persist-credentials: false
 
       - name: Check out target revision
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          path: _target
+          path: pxt-circuit-playground
           persist-credentials: false
 
-      - name: Select target revision in build workspace
-        run: |
-          set -euo pipefail
-          git -C pxt-circuit-playground fetch "$GITHUB_WORKSPACE/_target" HEAD
-          git -C pxt-circuit-playground checkout --detach FETCH_HEAD
-          test "$(git -C pxt-circuit-playground rev-parse HEAD)" = \
-            "$(git -C _target rev-parse HEAD)"
+      - name: Check out pinned PXT fork
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: jimparis/pxt
+          ref: b6fd06e058f0bc3f078d734b5253a22127aed183
+          path: pxt
+          persist-credentials: false
+
+      - name: Check out pinned CPB runtime
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: jimparis/codal-circuit-playground-bluefruit
+          ref: 30d62c331ea289d5b598e25676580dc6231bd390
+          path: codal-circuit-playground-bluefruit
+          persist-credentials: false
+
+      - name: Check out pinned CPB bootloader
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: jimparis/Adafruit_nRF52_Bootloader
+          ref: 7836c7cc3d813ab18c7c010a4e6f8fb787f68adc
+          path: Adafruit_nRF52_Bootloader
+          persist-credentials: false
 
       - name: Use Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
