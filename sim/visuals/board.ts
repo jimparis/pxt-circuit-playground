@@ -207,9 +207,10 @@ namespace pxsim.visuals {
         private addDefs(el: SVGElement) {
             const defs = svg.child(el, "defs", {});
 
-            let neopixelglow = svg.child(defs, "filter", { id: "neopixelglow", x: "-200%", y: "-200%", width: "400%", height: "400%" });
+            let neopixelglow = svg.child(defs, "filter", { id: "neopixelglow", x: "-300%", y: "-300%", width: "600%", height: "600%" });
             svg.child(neopixelglow, "feGaussianBlur", { stdDeviation: "4.3", result: "coloredBlur" });
             let neopixelmerge = svg.child(neopixelglow, "feMerge", {});
+            svg.child(neopixelmerge, "feMergeNode", { in: "coloredBlur" })
             svg.child(neopixelmerge, "feMergeNode", { in: "coloredBlur" })
             svg.child(neopixelmerge, "feMergeNode", { in: "SourceGraphic" })
 
