@@ -219,12 +219,16 @@
             "adafruit-circuit-playground-express": "CPLAYBOOT",
             "adafruit-circuit-playground-bluefruit": "CPLAYBTBOOT"
         },
+        "usbDeviceNames": {
+            "adafruit-circuit-playground-express": "CPlay Express",
+            "adafruit-circuit-playground-bluefruit": "Adafruit Circuit Playground nRF52840"
+        },
         "useTextLogo": "Circuit Playground MakeCode",
         "debugger": true,
         "print": true,
         "chooseBoardOnNewProject": true,
         "lightToc": true,
-        "instructions": true,
+        "instructions": false,
         "docMenu": [
             {
                 "name": "About",
