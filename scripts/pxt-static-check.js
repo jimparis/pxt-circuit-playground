@@ -291,10 +291,26 @@ child.on("close", async (code, signal) => {
             "docs/boards.html",
             "docs/privacy.html",
             "docs/terms.html",
-            "docs/static/60-circuit-playground-webusb.rules"
+            "docs/static/60-circuit-playground-webusb.rules",
+            "docs/static/home-banner-mist.png",
+            "docs/static/home-banner-ocean.png"
         ]) requireFile(name);
 
         const target = JSON.parse(fs.readFileSync(path.join(outputDirectory, "target.json"), "utf8"));
+        const heroImages = [
+            "docs/static/home-banner-mist.png",
+            "docs/static/home-banner-ocean.png"
+        ];
+        if (JSON.stringify(target.appTheme.homeScreenHero) !== JSON.stringify(heroImages)) {
+            throw new Error("Static package has invalid home-screen banner metadata");
+        }
+        for (const url of heroImages) {
+            const image = fs.readFileSync(path.join(outputDirectory, url));
+            if (image.length < 24 || image.subarray(0, 8).toString("hex") !== "89504e470d0a1a0a" ||
+                image.readUInt32BE(16) !== 1875 || image.readUInt32BE(20) !== 675) {
+                throw new Error(`Static package has an invalid home-screen banner: ${url}`);
+            }
+        }
         const rulesName = "60-circuit-playground-webusb.rules";
         if (target.appTheme.linuxUdevRulesUrl !== `/static/${rulesName}` ||
             target.appTheme.linuxUdevRulesFileName !== rulesName) {

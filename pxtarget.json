@@ -205,6 +205,10 @@
         "githubUrl": "https://github.com/jimparis/pxt-circuit-playground",
         "feedbackUrl": "https://github.com/jimparis/pxt-circuit-playground/issues",
         "boardName": "Circuit Playground",
+        "homeScreenHero": [
+            "/static/home-banner-mist.png",
+            "/static/home-banner-ocean.png"
+        ],
         "guidedDownloadFlow": true,
         "guidedDownloadRequiresWebHID": false,
         "downloadDialogTheme": {

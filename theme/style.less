@@ -46,7 +46,12 @@
     background: fade(@white, 14%);
 }
 
-/* Give the home screen some depth without depending on another image asset. */
+/* Keep the hand-drawn banner centered as the responsive hero slot crops it. */
+.ui.home.projectsdialog .ui.segment.getting-started-segment.hero {
+    background-position: center center;
+}
+
+/* Give the content below the banner some depth. */
 .ui.home.projectsdialog,
 .ui.segment.tabsegment {
     background: linear-gradient(145deg, #182126 0%, #203943 55%, #35213a 100%) !important;
